@@ -14,8 +14,8 @@ angular.module('bavaApp')
           password: $scope.user.password
         })
         .then( function() {
-          // Logged in, redirect to home
-          $location.path('/');
+          // Logged in, redirect the user to her list of polls
+          $location.path('/polls');
         })
         .catch( function(err) {
           $scope.errors.other = err.message;
