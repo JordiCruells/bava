@@ -1,0 +1,23 @@
+div(ng-include='"components/navbar/navbar.html"')
+banner
+  button.btn.btn-lg.btn-success(ng-click='show("form")') New Poll
+  button.btn.btn-lg.btn-primary(ng-click='show("list")') My Polls
+.container
+  .row
+    .col-lg-12.polls
+      .col-lg-4
+      .col-lg-4
+        ul.list-polls(ng-show='showList')
+          li(ng-repeat='poll in polls')
+            span(ng-bind='poll.title')
+            button(ng-click='delete(poll)')
+        form(ng-show='showForm')
+          input(type='text', ng-model='poll.title')
+      .col-lg-4
+
+footer.footer
+  .container
+    p
+      FreeCodeCamp Basejump Voting App
+      = ' | '
+      a(href='https://github.com/JordiCruells/bava') JordiCruells/bava
