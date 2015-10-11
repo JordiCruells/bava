@@ -7,12 +7,28 @@ banner
     .col-lg-12.polls
       .col-lg-4
       .col-lg-4
-        ul.list-polls(ng-show='showList')
-          li(ng-repeat='poll in polls')
-            span(ng-bind='poll.title')
-            button(ng-click='delete(poll)')
-        form(ng-show='showForm')
-          input(type='text', ng-model='poll.title')
+        #list-polls(ng-show='page === "list"')
+          h2 My polls
+          ul.list-polls.list-group
+            li.list-group-item(ng-repeat='poll in polls')
+              span(ng-bind='poll.title')
+              button.btn.btn-default(ng-click='alert("watch(poll)")')
+                i.fa.fa-eye
+              button.btn.btn-default(ng-click='delete(poll)')
+                i.fa.fa-times
+        #poll-form(ng-show='page === "form"')
+          h2 New Poll
+          form(ng-submit='addPoll()',name='newPollForm')
+            .form-group
+              label Title of your poll
+              input.form-control(type='text', ng-model='newPoll.title', required)
+            .form-group
+              label Options
+              .option(ng-repeat='option in newPoll.options')
+                 input.form-control(type='text', ng-model='newPoll.options[$index].text')
+            .form-buttons
+              button.btn.btn-default.btn-block(type='button',ng-click='addOption()') More options
+              button.btn.btn-primary.btn-block(type='submit') Submit
       .col-lg-4
 
 footer.footer

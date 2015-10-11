@@ -3,29 +3,39 @@
 angular.module('bavaApp')
   .controller('PollCtrl', function ($scope, $http) {
 
-    $scope.showForm = false;
-    $scope.showList = true;
-
-    $scope.show = function(el) {
-        if (el === 'form') {
-          $scope.showList = false;
-          $scope.showForm = true; }
-        else {
-          $scope.showList = true;
-          $scope.showForm = false;
-        }
+    var _emptyPoll = {title:'',options: [{text:''},{text:''} ]};
+    var _getPolls = function() {
+      $http.get('/api/polls').success(function(polls) {
+        $scope.polls = polls;
+      });
+    };
+    var _show = function(page) {
+      $scope.page = page;
+      if (page === 'form') {
+        // Reset new poll
+        $scope.newPoll = _.clone(_emptyPoll,true);
+      }
+      if (page === 'list') {
+        // Refresh list of polls (it may have changed since the last view)
+        _getPolls();
+      }
     };
 
-    $http.get('/api/polls').success(function(polls) {
-      $scope.polls = polls;
-    });
+    // By default load list of polls
+    _show('list');
+
+    $scope.show = _show;
+
+    $scope.addOption = function() {
+      $scope.newPoll.options.push({text:''});
+    };
 
     $scope.addPoll = function() {
       if(!$scope.newPoll) {
         return;
       }
-      $http.post('/api/polls', { name: $scope.newPoll });
-      $scope.newPoll = {};
+      $http.post('/api/polls', $scope.newPoll );
+      $scope.show('list');
     };
 
     $scope.deletePoll = function(poll) {
