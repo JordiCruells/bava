@@ -7,6 +7,7 @@
 
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
+var Poll = require('../api/poll/poll.model');
 
 Thing.find({}).remove(function() {
   Thing.create(
@@ -48,6 +49,38 @@ User.find({}).remove(function() {
     password: 'admin'
   }, function() {
       console.log('finished populating users');
+
+      // Create some polls for the test user
+      Poll.find({}).remove(function() {
+        User.findOne({email: 'test@test.com'}, function (err, user) {
+          Poll.create(
+            {
+              title: 'What is your favourite drink in the morning ?',
+              userId: user._id,
+              options: [{text:'cofee', votes:4}, {text:'milk&cofee', votes:5}, {text:'tea', votes:3}, {text:'fruits juice', votes:1}]
+            },
+            {
+              title: 'What is your favourite colour for a car ?',
+              userId: user._id,
+              options: [{text:'white', votes:7}, {text:'red', votes:2}, {text:'black', votes:11}, {text:'orange', votes:1}]
+            },
+            {
+              title: 'What team wil be winning the Champions League this year ?',
+              userId: user._id,
+              options: [{text:'F.C.Barcelona', votes:8}, {text:'R.Madrid', votes:2}, {text:'Bayern Munich', votes:5}, {text:'Manchester United', votes:2}]
+            },
+            function() {
+              console.log('finished populating polls for the test user');
+            }
+          );
+        });
+      });
+
     }
   );
 });
+
+
+
+
+
