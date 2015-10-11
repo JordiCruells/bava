@@ -14,7 +14,7 @@ banner
               span(ng-bind='poll.title')
               button.btn.btn-default(ng-click='alert("watch(poll)")')
                 i.fa.fa-eye
-              button.btn.btn-default(ng-click='delete(poll)')
+              button.btn.btn-default(ng-click='deletePoll(poll)')
                 i.fa.fa-times
         #poll-form(ng-show='page === "form"')
           h2 New Poll

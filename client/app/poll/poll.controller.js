@@ -9,6 +9,7 @@ angular.module('bavaApp')
         $scope.polls = polls;
       });
     };
+
     var _show = function(page) {
       $scope.page = page;
       if (page === 'form') {
@@ -39,6 +40,7 @@ angular.module('bavaApp')
     };
 
     $scope.deletePoll = function(poll) {
-      $http.delete('/api/polls/' + poll._id);
+      $http.delete('/api/polls/' + poll._id)
+        .success(_getPolls); //Refresh list after deletion
     };
   });

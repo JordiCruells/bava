@@ -65,6 +65,10 @@ exports.destroy = function(req, res) {
   Poll.findById(req.params.id, function (err, poll) {
     if(err) { return handleError(res, err); }
     if(!poll) { return res.status(404).send('Not Found'); }
+
+    //Check the poll belongs to the current user or the user has the 'admin' role
+    if (req.user.role !== 'admin' && !req.user._id.equals(poll.userId)) return res.status(403).send('Unauthorized');
+
     poll.remove(function(err) {
       if(err) { return handleError(res, err); }
       return res.status(204).send('No Content');
