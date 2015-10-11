@@ -25,7 +25,7 @@ banner
             .form-group
               label Options
               .option(ng-repeat='option in newPoll.options')
-                 input.form-control(type='text', ng-model='newPoll.options[$index].text')
+                 input.form-control(type='text', ng-model='newPoll.options[$index].text', ng-required ='{{ $index <= 1 }}')
             .form-buttons
               button.btn.btn-default.btn-block(type='button',ng-click='addOption()') More options
               button.btn.btn-primary.btn-block(type='submit') Submit
