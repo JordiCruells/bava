@@ -1,6 +1,6 @@
 div.carousel-popular-polls(ng-controller='popularPollsCtrl')
   h3 Top Polls
-  div(style="min-height: 450px")
+  div(style="min-height: 300px")
     carousel(interval="5000")
       slide(ng-repeat="poll in polls")
         .popular-poll-item
@@ -8,6 +8,6 @@ div.carousel-popular-polls(ng-controller='popularPollsCtrl')
           ul.list-group
             li.list-group-item(ng-repeat='option in poll.options')
               span {{option.text}}
-              button.btn.btn-primary.btn-xs(type=button, ng-show='!poll.voted' ng-click='vote(poll,option)') Vote!
+              button.btn.btn-primary.btn-xs(type=button, ng-show='!poll.voted', ng-click='vote(poll,option)') Vote!
               span.votes(ng-show='poll.voted') {{option.votes}} votes
 
