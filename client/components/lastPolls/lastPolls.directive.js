@@ -4,12 +4,11 @@
  * Removes server error when user updates input
  */
 angular.module('bavaApp')
-  .directive('popularPolls', function () {
+  .directive('lastPolls', function () {
     return {
       restrict: 'E',
       scope: true, //Otherwise scope of lastPolls and topPolls is conflicting
-      templateUrl: 'components/popularPolls/popularPolls.html',
-      replace: true,
-      require:['carousel','slide']
+      templateUrl: 'components/lastPolls/lastPolls.html',
+      replace: true
     };
   });

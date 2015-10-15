@@ -9,6 +9,7 @@
 
 'use strict';
 
+var mongoose = require('mongoose');
 var _ = require('lodash');
 var Poll = require('./poll.model.js');
 
@@ -24,6 +25,19 @@ exports.index = function(req, res) {
 exports.indexTop = function(req, res) {
   var limit =  req.params.limit || 5;
   Poll.find({}).sort({totalVotes: -1}).limit(limit).exec(function (err, polls) {
+    if(err) { return handleError(res, err); }
+    return res.status(200).json(polls);
+  });
+};
+
+// Get last introduced polls
+exports.indexLast = function(req, res) {
+  var limit =  req.params.limit || 5;
+  var page =  req.params.page || 0;
+  var skip = page * limit;
+  var exclude = req.query.exclude ? req.query.exclude.split(',').map(function(e) {return mongoose.Types.ObjectId(e); }) : [];
+
+  Poll.find({_id: {$nin: exclude}}).sort({date: -1}).limit(limit).skip(skip).exec(function (err, polls) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(polls);
   });
