@@ -58,37 +58,86 @@ User.find({}).remove(function() {
               title: 'What is your favourite drink in the morning ?',
               userId: user._id,
               options: [{text:'cofee', votes:4}, {text:'milk&cofee', votes:5}, {text:'tea', votes:3}, {text:'fruits juice', votes:1}],
-              totalVotes: 13
+              totalVotes: 13,
+              date: new Date('2015-10-05')
             },
             {
               title: 'What is your favourite colour for a car ?',
               userId: user._id,
               options: [{text:'white', votes:7}, {text:'red', votes:2}, {text:'black', votes:11}, {text:'orange', votes:1}],
-              totalVotes: 21
+              totalVotes: 21,
+              date: new Date('2015-10-08')
             },
             {
               title: 'What team wil be winning the Europe\'s Champions League this year ?',
               userId: user._id,
               options: [{text:'F.C.Barcelona', votes:8}, {text:'R.Madrid', votes:2}, {text:'Bayern Munich', votes:5}, {text:'Manchester United', votes:2}],
-              totalVotes: 17
+              totalVotes: 17,
+              date: new Date('2015-10-06')
             },
             {
               title: 'What is you favourite JS Framework ?',
               userId: user._id,
               options: [{text:'Angular JS', votes:7}, {text:'Backbone', votes:2}, {text:'React JS', votes:5}],
-              totalVotes: 14
+              totalVotes: 14,
+              date: new Date('2015-10-05')
             },
             {
               title: 'What is your favourite fruit ?',
               userId: user._id,
               options: [{text:'Bananas', votes:3}, {text:'strawberries', votes:2}, {text:'oranges', votes:5}, {text:'apples', votes:2}],
-              totalVotes: 12
+              totalVotes: 12,
+              date: new Date('2015-10-11')
             },
             {
-              title: 'Just a silly poll',
+              title: 'Just a silly poll 1',
               userId: user._id,
               options: [{text:'I don\'t care', votes:0}, {text:'I don\'t mind', votes:1}],
-              totalVotes: 1
+              totalVotes: 1,
+              date: new Date('2015-10-12')
+            },
+            {
+              title: 'Just a silly poll 2',
+              userId: user._id,
+              options: [{text:'I don\'t care', votes:0}, {text:'I don\'t mind', votes:1}],
+              totalVotes: 1,
+              date: new Date('2015-10-13')
+            },{
+              title: 'Just a silly poll 3',
+              userId: user._id,
+              options: [{text:'I don\'t care', votes:0}, {text:'I don\'t mind', votes:1}],
+              totalVotes: 1,
+              date: new Date('2015-10-14')
+            },{
+              title: 'Just a silly poll 4',
+              userId: user._id,
+              options: [{text:'I don\'t care', votes:0}, {text:'I don\'t mind', votes:1}],
+              totalVotes: 1,
+              date: new Date('2015-10-15')
+            },{
+              title: 'Just a silly poll 5',
+              userId: user._id,
+              options: [{text:'I don\'t care', votes:0}, {text:'I don\'t mind', votes:1}],
+              totalVotes: 1,
+              date: new Date('2015-10-16')
+            },{
+              title: 'Just a silly poll 6',
+              userId: user._id,
+              options: [{text:'I don\'t care', votes:0}, {text:'I don\'t mind', votes:1}],
+              totalVotes: 1,
+              date: new Date('2015-10-17')
+            },{
+              title: 'Just a silly poll 7',
+              userId: user._id,
+              options: [{text:'I don\'t care', votes:0}, {text:'I don\'t mind', votes:1}],
+              totalVotes: 1,
+              date: new Date('2015-10-18')
+            },{
+              title: 'Just a silly poll 8',
+              userId: user._id,
+              options: [{text:'I don\'t care', votes:0}, {text:'I don\'t mind', votes:1}],
+              totalVotes: 1,
+              date: new Date('2015-10-19')
             },
             function() {
               console.log('finished populating polls for the test user');
