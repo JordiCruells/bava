@@ -1,14 +1,19 @@
 div(ng-include='"components/navbar/navbar.html"')
 banner
   button.btn.btn-lg.btn-success Sign Up!
+
 .container
-  .row
+  .row#things
     .col-lg-12.features
       .col-lg-4(ng-repeat='thing in awesomeThings')
         i(class = 'fa fa-' + '{{ thing.icon }}' )
         h2 {{ thing.name}}
         p {{ thing.info }}
-
+   .row#popular-polls
+     .col-lg-4
+     .col-lg-4
+        popular-polls
+     .col-lg-4
 footer.footer
   .container
     p
