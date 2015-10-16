@@ -5,9 +5,11 @@ div.carousel-popular-polls(ng-controller='popularPollsCtrl')
       slide(ng-repeat="poll in polls")
         .popular-poll-item
           h4 {{ poll.title }}
-          ul.list-group
+          ul.list-group(ng-show='!poll.voted')
             li.list-group-item(ng-repeat='option in poll.options')
               span {{option.text}}
-              button.btn.btn-primary.btn-xs(type=button, ng-show='!poll.voted', ng-click='vote(poll,option)') Vote!
-              span.votes(ng-show='poll.voted') {{option.votes}} votes
+              button.btn.btn-primary.btn-xs(type=button, ng-click='vote(poll,option)') Vote!
+          .canvas-container(ng-show='poll.voted')
+            canvas.chart.chart-doughnut(chart-data='poll.data', chart-labels='poll.labels', chart-legend='poll.title', chart-options='chartOpts')
+
 

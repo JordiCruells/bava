@@ -11,9 +11,6 @@ angular.module('bavaApp').controller('lastPollsCtrl', function($scope, $http) {
     });
   };
   var _vote = function(poll, option) {
-
-    alert('vote ' + '/api/polls/' + poll._id + '/vote');
-
     $http.put('/api/polls/' + poll._id + '/vote', {text: option.text}).success(function(votedPoll) {
       angular.extend(poll, votedPoll, {voted:true});
     });
