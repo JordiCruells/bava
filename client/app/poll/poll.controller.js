@@ -7,7 +7,6 @@ angular.module('bavaApp')
     var _getPolls = function() {
       $http.get('/api/polls').success(function(polls) {
         $scope.polls = polls;
-        alert(JSON.stringify(polls));
       });
     };
 
@@ -27,7 +26,7 @@ angular.module('bavaApp')
     _show('list');
 
     $scope.show = _show;
-    
+
     $scope.addOption = function() {
       $scope.newPoll.options.push({text:''});
     };

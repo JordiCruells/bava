@@ -1,5 +1,6 @@
 @import "font-awesome/css/font-awesome.css"
 @import "bootstrap/dist/css/bootstrap.css"
+@import "angular-chart.js/dist/angular-chart.css"
 
 //
 // Bootstrap Fonts
@@ -37,11 +38,33 @@
     margin 0.2em 0
     padding 0.2em 0
 
+
+// Color scheme
+color-primary-0 = #4393B9	// Main Primary color */
+color-primary-1 = #99CCE6
+color-primary-2 = #67ADCF
+color-primary-3 = #267BA4
+color-primary-4 = #0C648E
+
+color-secondary-1-0 = #FFD054	// Main Secondary color (1) */
+color-secondary-1-1 = #FFE6A5
+color-secondary-1-2 = #FFDA78
+color-secondary-1-3 = #FFC632
+color-secondary-1-4 = #E0A509
+
+color-secondary-2-0 = #FF7854	// Main Secondary color (2) */
+color-secondary-2-1 = #FFB8A5
+color-secondary-2-2 = #FF9478
+color-secondary-2-3 = #FF5C32
+color-secondary-2-4 = #E03609
+
 // Component styles are injected through grunt
 // injector
 @import 'account/login/login.styl';
 @import 'admin/admin.styl';
 @import 'main/main.styl';
 @import 'poll/poll.styl';
+@import 'lastPolls/lastPolls.styl';
 @import 'modal/modal.styl';
+@import 'popularPolls/popularPolls.styl';
 // endinjector

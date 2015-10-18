@@ -5,6 +5,9 @@ angular.module('bavaApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    },{
+      'title': 'My Polls',
+      'link': '/polls'
     }];
 
     $scope.isCollapsed = true;
