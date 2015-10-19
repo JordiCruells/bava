@@ -11,5 +11,6 @@ div.carousel-popular-polls(ng-controller='popularPollsCtrl')
               button.btn.btn-primary.btn-xs(type=button, ng-click='vote(poll,option)') Vote!
           .canvas-container(ng-show='poll.voted')
             canvas.chart.chart-doughnut(chart-data='poll.data', chart-labels='poll.labels', chart-legend='poll.title', chart-options='chartOpts')
+            a.facebookShare(facebook-feed-share, data-url='http://bava.herokuapp.com/poll/{{ poll._id}}' data-shares='shares', data-description="{{ poll.title }}")
 
 

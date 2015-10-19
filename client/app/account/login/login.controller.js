@@ -15,7 +15,7 @@ angular.module('bavaApp')
         })
         .then( function() {
           // Logged in, redirect the user to her list of polls
-          $location.path('/polls');
+          $location.path('/my-polls');
         })
         .catch( function(err) {
           $scope.errors.other = err.message;

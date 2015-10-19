@@ -4,7 +4,7 @@ angular.module('bavaApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('poll', {
-        url: '/polls',
+        url: '/poll/:id',
         templateUrl: 'app/poll/poll.html',
         controller: 'PollCtrl'
       });

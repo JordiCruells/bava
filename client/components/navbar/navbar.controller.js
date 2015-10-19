@@ -7,7 +7,7 @@ angular.module('bavaApp')
       'link': '/'
     },{
       'title': 'My Polls',
-      'link': '/polls'
+      'link': '/my-polls'
     }];
 
     $scope.isCollapsed = true;

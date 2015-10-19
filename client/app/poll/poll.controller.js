@@ -1,46 +1,27 @@
 'use strict';
 
 angular.module('bavaApp')
-  .controller('PollCtrl', function ($scope, $http) {
+  .controller('PollCtrl', function ($scope, $http, $stateParams) {
 
-    var _emptyPoll = {title:'',options: [{text:''},{text:''} ]};
-    var _getPolls = function() {
-      $http.get('/api/polls').success(function(polls) {
-        $scope.polls = polls;
+    console.log('in poll ctrl');
+
+    var _getPoll = function(id) {
+      $http.get('/api/polls/' + id).success(function(poll) {
+        $scope.poll = poll;
       });
     };
-
-    var _show = function(page) {
-      $scope.page = page;
-      if (page === 'form') {
-        // Reset new poll
-        $scope.newPoll = _.clone(_emptyPoll,true);
-      }
-      if (page === 'list') {
-        // Refresh list of polls (it may have changed since the last view)
-        _getPolls();
-      }
+    var _vote = function(poll, option) {
+      $http.put('/api/polls/' + poll._id + '/vote', {text: option.text}).success(function(votedPoll) {
+        var sortOpts = angular.copy(poll.options).sort(function(a,b) {return a-b;});
+        var data = sortOpts.map(function (e) { return e.votes; });
+        var labels =  sortOpts.map(function (e) { return e.text; });
+        angular.extend(poll, votedPoll, {voted:true, data:data, labels: labels});
+      });
     };
+    console.log('param:' + $stateParams.id);
 
-    // By default load list of polls
-    _show('list');
+    _getPoll($stateParams.id);
 
-    $scope.show = _show;
+    $scope.vote = _vote;
 
-    $scope.addOption = function() {
-      $scope.newPoll.options.push({text:''});
-    };
-
-    $scope.addPoll = function() {
-      if(!$scope.newPoll) {
-        return;
-      }
-      $http.post('/api/polls', $scope.newPoll );
-      $scope.show('list');
-    };
-
-    $scope.deletePoll = function(poll) {
-      $http.delete('/api/polls/' + poll._id)
-        .success(_getPolls); //Refresh list after deletion
-    };
   });

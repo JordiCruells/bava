@@ -1,15 +1,7 @@
 div#last-polls(ng-controller='lastPollsCtrl')
   h3 More Polls
-  accordion.list-polls(close-others="true")
-    accordion-group(ng-repeat='poll in polls')
-      accordion-heading
-        span(ng-bind='poll.title')
-      div
-        ul.list-group.list-options
-          li.list-group-item(ng-repeat='option in poll.options')
-            span.text {{option.text}}
-            button.btn.btn-primary.btn-xs(type=button, ng-show='!poll.voted', ng-click='vote(poll,option)') Vote !
-            span.badge(ng-show='poll.voted') {{option.votes}} votes
+  .list-group
+    a.list-group-item(href='#',ng-href='/poll/{{poll._id}}',ng-repeat='poll in polls') {{ poll.title }}
   .text-center.btn-polls
     .btn-group
       button.btn.btn-default.btn-xs(ng-click='loadPrevious()', ng-disabled='page === 0') Previous

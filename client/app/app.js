@@ -6,7 +6,8 @@ angular.module('bavaApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'chart.js'
+  'chart.js',
+  'djds4rce.angular-socialshare'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
@@ -42,7 +43,7 @@ angular.module('bavaApp', [
     };
   })
 
-  .run(function ($rootScope, $location, Auth) {
+  .run(function ($rootScope, $location, Auth, $FB) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {
@@ -52,4 +53,5 @@ angular.module('bavaApp', [
         }
       });
     });
+    $FB.init('496517143842540');
   });

@@ -1,38 +1,21 @@
 div(ng-include='"components/navbar/navbar.html"')
 
 banner
-  button.btn.btn-lg.btn-success(ng-click='show("form")') New Poll
-  button.btn.btn-lg.btn-primary(ng-click='show("list")') My Polls
+
 .container
   .row
     .col-lg-12.polls
       .col-lg-4
       .col-lg-4
-        #list-polls(ng-show='page === "list"')
-          h2 My polls
-          accordion.list-polls(close-others="accordion.oneAtATime")
-              accordion-group(ng-repeat='poll in polls')
-                accordion-heading
-                  span(ng-bind='poll.title')
-                div
-                  ul.list-group.list-options
-                    li.list-group-item(ng-repeat='option in poll.options')
-                      span.text {{option.text}}
-                      span.votes {{option.votes}} votes
-                  a(ng-click='deletePoll(poll)') Delete this poll
-        #poll-form(ng-show='page === "form"')
-          h2 New Poll
-          form(ng-submit='addPoll()',name='newPollForm')
-            .form-group
-              label Title of your poll
-              input.form-control(type='text', ng-model='newPoll.title', required)
-            .form-group
-              label Options
-              .option(ng-repeat='option in newPoll.options')
-                 input.form-control(type='text', ng-model='newPoll.options[$index].text', ng-required ='{{ $index <= 1 }}')
-            .form-buttons
-              button.btn.btn-default.btn-block(type='button',ng-click='addOption()') More options
-              button.btn.btn-primary.btn-block(type='submit') Submit
+        #poll
+          h2 {{poll.title}}
+          ul.list-group.list-options(ng-show='!poll.voted')
+            li.list-group-item(ng-repeat='option in poll.options')
+              span.text {{option.text}}
+              button.btn.btn-primary(ng-click='vote(poll,option)') Vote!
+          .canvas-container(ng-show='poll.voted')
+            canvas.chart.chart-doughnut(chart-data='poll.data', chart-labels='poll.labels', chart-legend='poll.title', chart-options='chartOpts')
+          a.facebookShare(facebook-feed-share, data-url='http://bava.herokuapp.com/poll/' + '{{poll._id}}', data-shares='shares', data-description="{{ poll.title }}")
       .col-lg-4
 
 footer.footer
