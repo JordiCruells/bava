@@ -5,7 +5,7 @@ angular.module('bavaApp').controller('lastPollsCtrl', function($scope, $http) {
 
   var _getPolls = function(first) {
     $http.get('/api/polls/last/' + $scope.limit + '/' + $scope.page + $scope.excludePolls).success(function(polls) {
-      if (!first || polls.length == 0) {
+      if (!first || polls.length === 0) {
         $scope.polls = polls; // Prevent first load to update the model if it has been already loaded (popularPollsLoaded event)
       }
     });
@@ -19,7 +19,7 @@ angular.module('bavaApp').controller('lastPollsCtrl', function($scope, $http) {
     $scope.page += ($scope.polls.length === $scope.limit) ? 1 : 0;
   };
   var _loadPrevious = function() {
-    if($scope.page > 0) $scope.page -=1;
+    if($scope.page > 0) { $scope.page -=1 };
   };
 
   $scope.page = 0;
