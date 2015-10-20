@@ -35,8 +35,13 @@ angular.module('bavaApp')
       if(!$scope.newPoll) {
         return;
       }
-      $http.post('/api/polls', $scope.newPoll );
-      $scope.show('list');
+      //filter no blank options
+      $scope.newPoll.options =  $scope.newPoll.options.filter( function(e) {return e.text.length > 0 && !(e.text.match(/^\s+$/));});
+
+      $http.post('/api/polls', $scope.newPoll).success(function() {
+        $scope.show('list');
+      });
+
     };
 
     $scope.deletePoll = function(poll) {
