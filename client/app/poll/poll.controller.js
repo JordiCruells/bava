@@ -12,7 +12,7 @@ angular.module('bavaApp')
     };
     var _vote = function(poll, option) {
       $http.put('/api/polls/' + poll._id + '/vote', {text: option.text}).success(function(votedPoll) {
-        var sortOpts = angular.copy(poll.options).sort(function(a,b) {return a-b;});
+        var sortOpts = angular.copy(votedPoll.options).sort(function(a,b) {return a-b;});
         var data = sortOpts.map(function (e) { return e.votes; });
         var labels =  sortOpts.map(function (e) { return e.text; });
         angular.extend(poll, votedPoll, {voted:true, data:data, labels: labels});
