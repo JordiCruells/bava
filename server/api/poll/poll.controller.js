@@ -76,12 +76,16 @@ exports.create = function(req, res) {
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
   Poll.findById(req.params.id, function (err, poll) {
-    if (err) { return handleError(res, err); }
+    if (err) { console.log('err select ' + err); return handleError(res, err); }
     if(!poll) { return res.status(404).send('Not Found'); }
+
     var updated = _.merge(poll, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.status(200).json(poll);
+    //Don't merge options array, just update it with the list of options that comes in the request body
+    updated.options = req.body.options;
+
+    updated.save(function (err, updatedPoll) {
+      if (err) { console.log('err update ' + err); return handleError(res, err); }
+      return res.status(200).json(updatedPoll); //Return updated poll to avoid problems with the version
     });
   });
 };

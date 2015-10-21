@@ -19,8 +19,12 @@ banner
                     li.list-group-item(ng-repeat='option in poll.options')
                       span.text {{option.text}}
                       span.votes {{option.votes}} votes
+                  form(name='addOptionForm',ng-submit='saveOptionToOldPoll(poll)', ng-show='poll.showOptionForm')
+                    input(type='text', ng-model='poll.optionText', required)
+                    button.btn.btn-default(type='submit', ng-disabled='addOptionForm.$invalid') Save
                   a(ng-click='deletePoll(poll)') Delete this poll
-                  a.facebookShare(facebook-feed-share, data-url='http://bava.herokuapp.com/poll/{{poll._id}}' data-shares='shares', data-description="{{ poll.title }}")
+                  a(ng-show='poll.totalVotes === 0', ng-click='addOptionToOldPoll(poll)') {{ poll.showOptionForm ? 'Close' : 'Add new option' }}
+                  a.facebookShare(facebook-feed-share, data-url='http://bava.herokuapp.com/poll/{{poll._id}}' data-shares='shares', data-description="{{ poll.title }}") Share on Facebook
         #poll-form(ng-show='page === "form"')
           h2 New Poll
           form(ng-submit='addPoll()',name='newPollForm')

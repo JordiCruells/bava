@@ -6,7 +6,7 @@ angular.module('bavaApp')
     var _emptyPoll = {title:'',options: [{text:'', votes:0},{text:'', votes:0} ], totalVotes:0};
     var _getPolls = function() {
       $http.get('/api/polls').success(function(polls) {
-        $scope.polls = polls;
+        $scope.polls = polls.map(function(e) {return angular.extend(e, {showOptionForm: false, optionText: ''})});
       });
     };
 
@@ -20,6 +20,21 @@ angular.module('bavaApp')
         // Refresh list of polls (it may have changed since the last view)
         _getPolls();
       }
+    };
+
+    var _addOptionToOldPoll = function (poll) {
+      poll.showOptionForm = !poll.showOptionForm;
+    };
+
+    var _saveOptionToOldPoll = function(poll) {
+
+      var updatedPoll = angular.merge({}, poll);
+      updatedPoll.options.push({text: poll.optionText, votes: 0 });
+
+      $http.put('/api/polls/' + poll._id, updatedPoll).success(function(p) {
+        poll = angular.merge(poll, p, {showOptionForm: false, optionText:''});
+      });
+
     };
 
     // By default load list of polls
@@ -48,4 +63,8 @@ angular.module('bavaApp')
       $http.delete('/api/polls/' + poll._id)
         .success(_getPolls); //Refresh list after deletion
     };
+
+    $scope.addOptionToOldPoll = _addOptionToOldPoll;
+    $scope.saveOptionToOldPoll = _saveOptionToOldPoll;
+
   });
