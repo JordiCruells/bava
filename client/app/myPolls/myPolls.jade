@@ -19,12 +19,23 @@ banner
                     li.list-group-item(ng-repeat='option in poll.options')
                       span.text {{option.text}}
                       span.votes {{option.votes}} votes
-                  form(name='addOptionForm',ng-submit='saveOptionToOldPoll(poll)', ng-show='poll.showOptionForm')
-                    input(type='text', ng-model='poll.optionText', required)
-                    button.btn.btn-default(type='submit', ng-disabled='addOptionForm.$invalid') Save
-                  a(ng-click='deletePoll(poll)') Delete this poll
-                  a(ng-show='poll.totalVotes === 0', ng-click='addOptionToOldPoll(poll)') {{ poll.showOptionForm ? 'Close' : 'Add new option' }}
-                  a.facebookShare(facebook-feed-share, data-url='http://bava.herokuapp.com/poll/{{poll._id}}' data-shares='shares', data-description="{{ poll.title }}") Share on Facebook
+                  form.form-horizontal(name='addOptionForm',ng-submit='saveOptionToOldPoll(poll)', ng-show='poll.showOptionForm')
+                    input.form-control(type='text', ng-model='poll.optionText', required)
+                    br
+                    .btn-group.btn-group-justified
+                      .btn-group
+                        button.btn.btn-default.btn-block(type='submit', ng-disabled='addOptionForm.$invalid') Save
+                      .btn-group
+                        button.btn.btn-default.btn-block(type='button', ng-click='addOptionToOldPoll(poll)') Cancel
+                    br
+                  .btn-group.btn-group-justified
+                    .btn-group
+                      button.btn.btn-default.btn-block.btn-primary(ng-show='poll.totalVotes === 0', ng-click='addOptionToOldPoll(poll)') Add new option
+                    .btn-group
+                      button.btn.btn-default.btn-block.btn-danger(ng-click='deletePoll(poll)') Delete this poll
+                  br
+                  .text-center
+                    a.facebookShare(facebook-feed-share, data-url='http://bava.herokuapp.com/poll/{{poll._id}}' data-shares='shares', data-description="{{ poll.title }}") Share on Facebook
         #poll-form(ng-show='page === "form"')
           h2 New Poll
           form(ng-submit='addPoll()',name='newPollForm')
