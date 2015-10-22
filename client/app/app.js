@@ -43,6 +43,26 @@ angular.module('bavaApp', [
     };
   })
 
+  .factory('cookieManager', function($cookies) {
+
+    return {
+      storeVotedPoll : function (id) {
+        var votedPolls = $cookies.getObject('votedPolls') || {};
+        votedPolls[id] = 1;
+        $cookies.putObject('votedPolls', votedPolls);
+      },
+      getVotedPolls : function() {
+        var votedPolls = $cookies.getObject('votedPolls') || {};
+        var votedPollsArr = [];
+        angular.forEach(votedPolls, function (v,k) {
+          votedPollsArr.push(k);
+        });
+        return votedPollsArr;
+      }
+    };
+
+  })
+
   .run(function ($rootScope, $location, Auth, $FB) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
