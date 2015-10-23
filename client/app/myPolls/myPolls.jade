@@ -45,7 +45,9 @@ banner
             .form-group
               label Options
               .option(ng-repeat='option in newPoll.options')
-                 input.form-control(type='text', ng-model='newPoll.options[$index].text', ng-required ='{{ $index <= 1 }}')
+                 input.form-control(type='text', name='options[{{ $index }}]', ng-model='newPoll.options[$index].text', ng-required ='{{ $index <= 1 }}', ng-change='checkOptionNotDuplicated()')
+                 .alert.alert-danger(ng-if='isDuplicated($index)') Duplicated option
+
             .form-buttons
               button.btn.btn-default.btn-block(type='button',ng-click='addOption()') More options
               button.btn.btn-primary.btn-block(type='submit', ng-disabled='newPollForm.$invalid') Submit

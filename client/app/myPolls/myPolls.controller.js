@@ -37,6 +37,29 @@ angular.module('bavaApp')
 
     };
 
+    var _checkOptionNotDuplicated = function() {
+      var i, field, invalid;
+      var options = angular.copy($scope.newPoll.options)
+        .map(function (e,index) {
+          return angular.merge(e, {index: index});
+        })
+        .sort(function (a,b) {
+          if (a.text > b.text) {return 1;}
+          else if (a.text < b.text) { return -1;}
+          else return 0;
+        });
+
+      for (i=0; i<options.length;i++) {
+        field = $scope.newPollForm['options[' + options[i].index + ']'];
+        invalid = ((options[i-1] && options[i-1].text === options[i].text) || (options[i+1] && options[i+1].text === options[i].text));
+        field.$setValidity('isDuplicated',!invalid);
+      }
+    };
+
+    var _isDuplicated = function(index) {
+      return $scope.newPollForm['options[' + index + ']'].$error.isDuplicated;
+    };
+
     // By default load list of polls
     _show('list');
 
@@ -64,7 +87,10 @@ angular.module('bavaApp')
         .success(_getPolls); //Refresh list after deletion
     };
 
+
     $scope.addOptionToOldPoll = _addOptionToOldPoll;
     $scope.saveOptionToOldPoll = _saveOptionToOldPoll;
+    $scope.checkOptionNotDuplicated = _checkOptionNotDuplicated;
+    $scope.isDuplicated = _isDuplicated;
 
   });
