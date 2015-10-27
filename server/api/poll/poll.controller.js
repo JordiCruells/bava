@@ -54,12 +54,9 @@ exports.indexUser = function(req, res) {
 
 // Get a single poll by id
 exports.show = function(req, res) {
-  console.log('show ' + req.params.id);
   Poll.findById(req.params.id, function (err, poll) {
     if(err) { return handleError(res, err); }
     if(!poll) { return res.status(404).send('Not Found'); }
-
-    console.log(JSON.stringify(poll));
     return res.json(poll);
   });
 };

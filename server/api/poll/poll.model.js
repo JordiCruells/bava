@@ -7,7 +7,8 @@ var PollSchema = new Schema({
   userId: String,
   title: String,
   options: [{text:String, votes:Number}],
-  totalVotes: Number
+  totalVotes: Number,
+  date: Date
 });
 
 PollSchema.methods.vote = function vote (text, cb) {
