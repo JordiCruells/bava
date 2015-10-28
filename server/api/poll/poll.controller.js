@@ -76,6 +76,9 @@ exports.update = function(req, res) {
     if (err) { console.log('err select ' + err); return handleError(res, err); }
     if(!poll) { return res.status(404).send('Not Found'); }
 
+    //Check the poll belongs to the current user or the user has the 'admin' role
+    if (req.user.role !== 'admin' && !req.user._id.equals(poll.userId)) return res.status(403).send('Unauthorized');
+
     var updated = _.merge(poll, req.body);
     //Don't merge options array, just update it with the list of options that comes in the request body
     updated.options = req.body.options;
