@@ -24,6 +24,7 @@ module.exports = function(config) {
       'client/bower_components/Chart.js/Chart.js',
       'client/bower_components/angular-chart.js/dist/angular-chart.js',
       'client/bower_components/angular-socialshare/angular-socialshare.js',
+      'client/util/builders/**/*.js',  //Attach builders for cleaner tests
       'client/app/app.js',
       'client/app/app.coffee',
       'client/app/**/*.js',
